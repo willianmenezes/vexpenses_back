@@ -5,15 +5,13 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vexpenses", "vexpenses\vexpenses.csproj", "{A98A7352-5E4A-4130-973F-F515FACCF1D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vexpenses.library", "vexpenses.library\vexpenses.library.csproj", "{16B4F5B5-B001-4F17-A720-949ACE450D87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vexpenses.library", "vexpenses.library\vexpenses.library.csproj", "{16B4F5B5-B001-4F17-A720-949ACE450D87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vexpenses.data", "vexpenses.data\vexpenses.data.csproj", "{38B4E5FF-5585-41A4-AC33-9290329D18E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vexpenses.data", "vexpenses.data\vexpenses.data.csproj", "{38B4E5FF-5585-41A4-AC33-9290329D18E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vexpenses.data.structure", "vexpenses.data.structure\vexpenses.data.structure.csproj", "{F8AC98D8-B4CD-44EE-A8D1-497E90B44AFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vexpenses.utils", "vexpenses.utils\vexpenses.utils.csproj", "{79C04A0B-9377-4951-B006-4EDB8D91AE5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vexpenses.utils", "vexpenses.utils\vexpenses.utils.csproj", "{79C04A0B-9377-4951-B006-4EDB8D91AE5A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vexpenses.business", "vexpenses.business\vexpenses.business.csproj", "{9CB4C47B-438A-4564-898D-261D60B940A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vexpenses.business", "vexpenses.business\vexpenses.business.csproj", "{9CB4C47B-438A-4564-898D-261D60B940A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +31,6 @@ Global
 		{38B4E5FF-5585-41A4-AC33-9290329D18E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38B4E5FF-5585-41A4-AC33-9290329D18E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38B4E5FF-5585-41A4-AC33-9290329D18E6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F8AC98D8-B4CD-44EE-A8D1-497E90B44AFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F8AC98D8-B4CD-44EE-A8D1-497E90B44AFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F8AC98D8-B4CD-44EE-A8D1-497E90B44AFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F8AC98D8-B4CD-44EE-A8D1-497E90B44AFA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{79C04A0B-9377-4951-B006-4EDB8D91AE5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{79C04A0B-9377-4951-B006-4EDB8D91AE5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79C04A0B-9377-4951-B006-4EDB8D91AE5A}.Release|Any CPU.ActiveCfg = Release|Any CPU

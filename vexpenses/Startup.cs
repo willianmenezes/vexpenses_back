@@ -15,12 +15,24 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 using vexpenses.business.Security;
+using vexpenses.data.IRepositories;
+using vexpenses.data.Repositories;
+using vexpenses.business.Components;
+using vexpenses.data.Context;
 
 namespace vexpenses
 {
+    /// <summary>
+    /// Class Startup
+    /// </summary>
     public class Startup
     {
         private const string DefaultCorsPolicy = "DefaultCorsPolicy";
+
+        /// <summary>
+        /// Contructor
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -41,12 +53,13 @@ namespace vexpenses
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
+            ConfiguracaoContext(services);
             ConfigureAppSettings(services);
             ConfigureAutoMapper(services);
             ConfigureSwagger(services);
             ConfigureCors(services);
-            ConfigureComponentServices(services);
             ConfigureRepository(services);
+            ConfigureComponentServices(services);
             ConfigureJWT(services);
         }
 
@@ -88,13 +101,23 @@ namespace vexpenses
             });
         }
 
+        private void ConfiguracaoContext(IServiceCollection services)
+        {
+            //injetando contexto do banco de dados
+            services.AddEntityFrameworkNpgsql()
+                    .AddDbContext<VExpensesContext>()
+                    .BuildServiceProvider();
+        }
+
         private void ConfigureComponentServices(IServiceCollection services)
         {
+            services.AddScoped<UserComponent>();
         }
 
         private void ConfigureRepository(IServiceCollection services)
         {
-           
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         private void ConfigureCors(IServiceCollection services)

@@ -3,7 +3,9 @@
 CREATE TABLE pessoa (
 	pessoaid uuid NOT NULL DEFAULT uuid_generate_v4(),
 	nome varchar(200) NOT NULL,
+	email varchar(200) NOT NULL,
 	senha varchar(50) NOT NULL,
+	status boolean not null default true
 	CONSTRAINT pk_pessoa_pessoaid PRIMARY KEY (pessoaid)
 );
 
@@ -48,6 +50,7 @@ constraint agendacontato_pk primary key(agendaid, contatoid),
 constraint agendacontato_contato_fk foreign key (contatoid) references contato(contatoid),
 constraint agendacontato_agenda_fk foreign key (agendaid) references agenda(agendaid)
 );
+ALTER TABLE public.agendacontato ADD CONSTRAINT agendacontato_agenda_uk UNIQUE (agendaid);
 
 create table endereco(
 enderecoid			uuid primary key default uuid_generate_v4(),
