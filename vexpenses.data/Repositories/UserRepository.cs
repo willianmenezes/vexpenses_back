@@ -7,14 +7,9 @@ using vexpenses.library.Entities;
 
 namespace vexpenses.data.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : BaseRepository, IUserRepository
     {
-        private readonly VExpensesContext _context;
-
-        public UserRepository(VExpensesContext context)
-        {
-            _context = context;
-        }
+        public UserRepository(VExpensesContext context) : base(context) { }
 
         public Pessoa GetByLogin(string login)
         {

@@ -9,7 +9,6 @@ namespace vexpenses.Controllers
     /// <summary>
     /// Controller
     /// </summary>
-    [Route("api/[controller]")]
     [ApiController]
     public class VExpensesBaseController : ControllerBase
     {

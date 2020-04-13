@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vexpenses.library", "vexpen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vexpenses.data", "vexpenses.data\vexpenses.data.csproj", "{38B4E5FF-5585-41A4-AC33-9290329D18E6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vexpenses.utils", "vexpenses.utils\vexpenses.utils.csproj", "{79C04A0B-9377-4951-B006-4EDB8D91AE5A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vexpenses.business", "vexpenses.business\vexpenses.business.csproj", "{9CB4C47B-438A-4564-898D-261D60B940A1}"
 EndProject
 Global
@@ -31,10 +29,6 @@ Global
 		{38B4E5FF-5585-41A4-AC33-9290329D18E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38B4E5FF-5585-41A4-AC33-9290329D18E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38B4E5FF-5585-41A4-AC33-9290329D18E6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{79C04A0B-9377-4951-B006-4EDB8D91AE5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{79C04A0B-9377-4951-B006-4EDB8D91AE5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{79C04A0B-9377-4951-B006-4EDB8D91AE5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{79C04A0B-9377-4951-B006-4EDB8D91AE5A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9CB4C47B-438A-4564-898D-261D60B940A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9CB4C47B-438A-4564-898D-261D60B940A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CB4C47B-438A-4564-898D-261D60B940A1}.Release|Any CPU.ActiveCfg = Release|Any CPU

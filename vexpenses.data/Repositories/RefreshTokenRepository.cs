@@ -6,14 +6,9 @@ using vexpenses.library.Entities;
 
 namespace vexpenses.data.Repositories
 {
-    public class RefreshTokenRepository : IRefreshTokenRepository
+    public class RefreshTokenRepository : BaseRepository, IRefreshTokenRepository
     {
-        private readonly VExpensesContext _context;
-
-        public RefreshTokenRepository(VExpensesContext context)
-        {
-            _context = context;
-        }
+        public RefreshTokenRepository(VExpensesContext context) : base(context) { }
 
         public void SetRefreshToken(RefreshToken refreshtoken)
         {

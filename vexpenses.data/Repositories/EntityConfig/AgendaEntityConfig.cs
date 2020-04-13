@@ -38,6 +38,11 @@ namespace vexpenses.data.Repositories.EntityConfig
                    .HasColumnName("pessoaid")
                    .IsRequired();
 
+            builder.Property(x => x.Status)
+                  .HasColumnName("status")
+                  .IsRequired();
+
+
             builder.HasOne(x => x.Pessoa)
                     .WithMany(x => x.Agenda)
                     .HasForeignKey(x => x.PessoaId)

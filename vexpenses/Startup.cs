@@ -38,8 +38,15 @@ namespace vexpenses
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IConfiguration Configuration { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -63,6 +70,11 @@ namespace vexpenses
             ConfigureJWT(services);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -112,12 +124,14 @@ namespace vexpenses
         private void ConfigureComponentServices(IServiceCollection services)
         {
             services.AddScoped<UserComponent>();
+            services.AddScoped<AgendaComponent>();
         }
 
         private void ConfigureRepository(IServiceCollection services)
         {
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAgendaRepository, AgendaRepository>();
         }
 
         private void ConfigureCors(IServiceCollection services)
