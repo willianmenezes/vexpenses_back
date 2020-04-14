@@ -25,11 +25,11 @@ namespace vexpenses.data.Repositories
             }
         }
 
-        public async Task<bool> VerificarAgendaPorNome(string nome)
+        public async Task<bool> VerificarAgendaPorNome(string nome, Guid pessoaId)
         {
             try
             {
-                return await _context.Agenda.AnyAsync(x => x.Nome.ToLower().Equals(nome.ToLower()));
+                return await _context.Agenda.AnyAsync(x => x.Nome.ToLower().Equals(nome.ToLower()) && x.PessoaId.Equals(pessoaId));
             }
             catch (Exception ex)
             {

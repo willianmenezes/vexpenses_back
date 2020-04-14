@@ -125,6 +125,12 @@ namespace vexpenses
         {
             services.AddScoped<UserComponent>();
             services.AddScoped<AgendaComponent>();
+            services.AddScoped<AgendaContatoComponent>();
+            services.AddScoped<EnderecoComponent>();
+            services.AddScoped<TelefoneComponent>();
+            services.AddScoped<TipoAgendaComponent>();
+            services.AddScoped<TipoTelefoneComponent>();
+            services.AddScoped<ContatoComponent>();
         }
 
         private void ConfigureRepository(IServiceCollection services)
@@ -132,6 +138,12 @@ namespace vexpenses
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAgendaRepository, AgendaRepository>();
+            services.AddScoped<IAgendaContatoRepository, AgendaContatoRepository>();
+            services.AddScoped<IContatoRepository, ContatoRepository>();
+            services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+            services.AddScoped<ITelefoneRepository, TelefoneRepository>();
+            services.AddScoped<ITipoAgendaRepository, TipoAgendaRepository>();
+            services.AddScoped<ITipoTelefoneRepository, TipoTelefoneRepository>();
         }
 
         private void ConfigureCors(IServiceCollection services)

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using vexpenses.library.Entities;
 
 namespace vexpenses.data.IRepositories
@@ -7,6 +8,6 @@ namespace vexpenses.data.IRepositories
     {
         Task CadastrarAgenda(Agenda agenda);
 
-        Task<bool> VerificarAgendaPorNome(string nome);
+        Task<bool> VerificarAgendaPorNome(string nome, Guid pessoaId);
     }
 }

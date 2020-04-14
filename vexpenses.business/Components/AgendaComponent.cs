@@ -26,7 +26,7 @@ namespace vexpenses.business.Components
                 throw new Exception("Dados do usuário não encontrados");
             }
 
-            if (await _agendaRepository.VerificarAgendaPorNome(request.Nome))
+            if (await _agendaRepository.VerificarAgendaPorNome(request.Nome, user.PessoaId))
             {
                 throw new Exception("Já existe uma agenda cadastrada com este nome, por favor selecione outro.");
             }

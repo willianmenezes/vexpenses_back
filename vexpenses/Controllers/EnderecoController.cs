@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using vexpenses.business.Components;
 using vexpenses.library.Models;
@@ -12,28 +10,28 @@ using vexpenses.library.Models.Request;
 namespace vexpenses.Controllers
 {
     /// <summary>
-    /// controller
+    /// Controller
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class AgendaController : VExpensesBaseController
+    public class EnderecoController : VExpensesBaseController
     {
-        private readonly AgendaComponent _agendaComponent;
+        private readonly EnderecoComponent _enderecoComponent;
 
         /// <summary>
-        /// Controller
+        /// Constructor
         /// </summary>
-        /// <param name="agendaComponent"></param>
-        public AgendaController(AgendaComponent agendaComponent)
+        /// <param name="enderecoComponent"></param>
+        public EnderecoController(EnderecoComponent enderecoComponent)
         {
-            _agendaComponent = agendaComponent;
+            _enderecoComponent = enderecoComponent;
         }
 
         /// <summary>
-        /// Cadastra uma agenda de contatos
+        /// Cadastra um ou mais endereços de um contato
         /// </summary>
         /// <returns></returns>
-        /// <response code="200">Agenda registrada com sucesso</response>
+        /// <response code="200">Endereço registrado com sucesso</response>
         /// <response code="400">Ocorreu algum erro com a solicitação. Esta resposta pode mostrar as propriedades do erro ou apenas uma mensagem do que acontece</response>
         /// <response code="401">Não autorizado, deve obter um token de portador válido antes de fazer esta solicitação</response>
         /// <response code="404">Dados não encontrados</response>
@@ -41,14 +39,14 @@ namespace vexpenses.Controllers
         [ProducesResponseType(400, Type = typeof(RequestResponse))]
         [ProducesResponseType(401, Type = typeof(RequestResponse))]
         [Authorize("Bearer")]
-        [HttpPost]
-        public async Task<IActionResult> CadastrarAgenda([FromBody] AgendaRequest request)
+        [HttpPost("{contatoId}")]
+        public async Task<IActionResult> CadastrarEnderecos([FromBody] List<EnderecoRequest> request, [FromRoute] Guid contatoId)
         {
             try
             {
-                await _agendaComponent.CadastrarAgenda(GetClaim(), request);
+                await _enderecoComponent.CadastrarEnderecos(request, contatoId);
 
-                return Ok(new RequestResponse { Mensagem = "Agenda Cadastrada com sucesso" });
+                return Ok(new RequestResponse { Mensagem = "Endereço(s) registrado(s) com sucesso" });
             }
             catch (Exception ex)
             {
