@@ -18,6 +18,9 @@ namespace vexpenses.library.Models.Request
         [MaxLength(200)]
         public string Email { get; set; }
 
+        [Required]
+        public Guid AgendaId { get; set; }
+
         public List<EnderecoRequest> Enderecos { get; set; }
 
         public List<TelefoneRequest> Telefones { get; set; }
@@ -29,7 +32,7 @@ namespace vexpenses.library.Models.Request
                 Nome = Nome.Trim(),
                 Sobrenome = Sobrenome.Trim(),
                 Email = Email.Trim(),
-                Status = true,
+                Status = true
             };
         }
     }

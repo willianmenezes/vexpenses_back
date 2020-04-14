@@ -17,7 +17,7 @@ namespace vexpenses.data.Repositories.EntityConfig
                     .IsRequired();
 
             builder.Property(x => x.ContatoId)
-                    .HasColumnName("contatoId")
+                    .HasColumnName("contatoid")
                     .IsRequired();
 
             builder.HasOne(x => x.Agenda)

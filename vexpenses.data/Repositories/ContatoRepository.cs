@@ -11,12 +11,14 @@ namespace vexpenses.data.Repositories
     {
         public ContatoRepository(VExpensesContext context) : base(context) { }
 
-        public async Task CadastrarContato(Contato contato)
+        public async Task CadastrarContato(Contato contato, Guid agendaId)
         {
             try
             {
                 await _context.Contato.AddAsync(contato);
+                await _context.AgendaContato.AddAsync(new AgendaContato { AgendaId = agendaId, ContatoId = contato.ContatoId });
                 await _context.SaveChangesAsync();
+
             }
             catch (Exception ex)
             {

@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using vexpenses.library.Entities;
 
 namespace vexpenses.data.IRepositories
 {
     public interface IContatoRepository
     {
-        Task CadastrarContato(Contato contato);
+        Task CadastrarContato(Contato contato, Guid agendaId);
     }
 }

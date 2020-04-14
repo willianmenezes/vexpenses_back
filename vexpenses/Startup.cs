@@ -19,6 +19,7 @@ using vexpenses.data.IRepositories;
 using vexpenses.data.Repositories;
 using vexpenses.business.Components;
 using vexpenses.data.Context;
+using vexpenses.library.Config;
 
 namespace vexpenses
 {
@@ -131,6 +132,7 @@ namespace vexpenses
             services.AddScoped<TipoAgendaComponent>();
             services.AddScoped<TipoTelefoneComponent>();
             services.AddScoped<ContatoComponent>();
+            services.AddScoped<EmailComponent>();
         }
 
         private void ConfigureRepository(IServiceCollection services)
@@ -205,7 +207,9 @@ namespace vexpenses
 
         private void ConfigureAppSettings(IServiceCollection services)
         {
-
+            var emailConfig = new EmailConfig();
+            new ConfigureFromConfigurationOptions<EmailConfig>(Configuration.GetSection("EmailConfig")).Configure(emailConfig);
+            services.AddSingleton(emailConfig);
         }
 
         private void ConfigureJWT(IServiceCollection services)

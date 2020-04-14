@@ -17,6 +17,7 @@ namespace vexpenses.Controllers
     {
         private readonly ContatoComponent _contatoComponent;
         private readonly EnderecoComponent _enderecoComponent;
+        private readonly EmailComponent _emailComponent;
         private readonly TelefoneComponent  _telefoneComponent;
 
         /// <summary>
@@ -25,11 +26,12 @@ namespace vexpenses.Controllers
         /// <param name="contatoComponent"></param>
         /// <param name="enderecoComponent"></param>
         /// <param name="telefoneComponent"></param>
-        public ContatoController(ContatoComponent contatoComponent, EnderecoComponent enderecoComponent, TelefoneComponent telefoneComponent)
+        public ContatoController(ContatoComponent contatoComponent, EnderecoComponent enderecoComponent, TelefoneComponent telefoneComponent, EmailComponent emailComponent)
         {
             _contatoComponent = contatoComponent;
             _telefoneComponent = telefoneComponent;
             _enderecoComponent = enderecoComponent;
+            _emailComponent = emailComponent;
         }
 
         /// <summary>
@@ -49,7 +51,7 @@ namespace vexpenses.Controllers
         {
             try
             {
-                await _contatoComponent.CadastrarContato(request, _telefoneComponent, _enderecoComponent);
+                await _contatoComponent.CadastrarContato(request, _telefoneComponent, _enderecoComponent, _emailComponent);
 
                 return Ok(new RequestResponse { Mensagem = "Contato cadastrado com sucesso" });
             }

@@ -14,7 +14,7 @@ namespace vexpenses.business.Components
             _contatoRepository = contatoRepository;
         }
 
-        public async Task CadastrarContato(ContatoRequest request, TelefoneComponent telefoneComponent, EnderecoComponent enderecoComponent)
+        public async Task CadastrarContato(ContatoRequest request, TelefoneComponent telefoneComponent, EnderecoComponent enderecoComponent, EmailComponent emailComponent)
         {
             request.Validate();
 
@@ -23,9 +23,14 @@ namespace vexpenses.business.Components
                 throw new Exception("O nome do contato é obrigatório.");
             }
 
+            if (request.AgendaId == Guid.Empty)
+            {
+                throw new Exception("ID da agenda não fornecido para realizar o cadastro.");
+            }
+
             var contato = request.ConvertyToEntity();
 
-            await _contatoRepository.CadastrarContato(contato);
+            await _contatoRepository.CadastrarContato(contato, request.AgendaId);
 
             if (contato.ContatoId == Guid.Empty)
             {
@@ -38,6 +43,8 @@ namespace vexpenses.business.Components
             await telefoneComponent.CadastrarTelefones(telefone, contato.ContatoId);
 
             await enderecoComponent.CadastrarEnderecos(endereco, contato.ContatoId);
+
+            await emailComponent.EnviarEmailContato(contato, "willian_menezes_santos@hotmail.com", "agenda teste");
         }
     }
 }
