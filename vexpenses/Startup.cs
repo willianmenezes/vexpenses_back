@@ -133,6 +133,7 @@ namespace vexpenses
             services.AddScoped<TipoTelefoneComponent>();
             services.AddScoped<ContatoComponent>();
             services.AddScoped<EmailComponent>();
+            services.AddScoped<CorreiosComponent>();
         }
 
         private void ConfigureRepository(IServiceCollection services)
@@ -210,6 +211,8 @@ namespace vexpenses
             var emailConfig = new EmailConfig();
             new ConfigureFromConfigurationOptions<EmailConfig>(Configuration.GetSection("EmailConfig")).Configure(emailConfig);
             services.AddSingleton(emailConfig);
+
+            services.AddHttpClient<RestfullComponent>().SetHandlerLifetime(TimeSpan.FromMinutes(5));
         }
 
         private void ConfigureJWT(IServiceCollection services)
