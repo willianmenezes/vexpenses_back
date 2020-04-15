@@ -1,17 +1,22 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using vexpenses.data.IRepositories;
 using vexpenses.library.Helpers;
 using vexpenses.library.Models.Request;
+using vexpenses.library.Models.Response;
 
 namespace vexpenses.business.Components
 {
     public class ContatoComponent
     {
         private readonly IContatoRepository _contatoRepository;
-        public ContatoComponent(IContatoRepository contatoRepository)
+        private readonly IMapper _mapper;
+        public ContatoComponent(IContatoRepository contatoRepository, IMapper mapper)
         {
             _contatoRepository = contatoRepository;
+            _mapper = mapper;
         }
 
         public async Task CadastrarContato(ContatoRequest request, TelefoneComponent telefoneComponent, EnderecoComponent enderecoComponent, EmailComponent emailComponent)
@@ -44,7 +49,22 @@ namespace vexpenses.business.Components
 
             await enderecoComponent.CadastrarEnderecos(endereco, contato.ContatoId);
 
-            await emailComponent.EnviarEmailContato(contato, "willian_menezes_santos@hotmail.com", "agenda teste");
+            if (!string.IsNullOrWhiteSpace(contato.Email))
+            {
+                await emailComponent.EnviarEmailContato(contato, contato.Email);
+            }
+        }
+
+        public async Task<List<ContatoResponse>> BuscarContatosPorAgenda(Guid agendaId)
+        {
+            if (agendaId == Guid.Empty)
+            {
+                throw new Exception("ID da agenda não fornecido");
+            }
+
+            var contatos = await _contatoRepository.BuscarContatosPorAgenda(agendaId);
+
+            return _mapper.Map<List<ContatoResponse>>(contatos);
         }
     }
 }

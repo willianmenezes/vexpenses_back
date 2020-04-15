@@ -85,6 +85,6 @@ namespace vexpenses.Controllers
             {
                 return BadRequest(new RequestResponse { Mensagem = ex.Message });
             }
-        }
+        } 
     }
 }

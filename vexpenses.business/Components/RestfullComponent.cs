@@ -54,8 +54,6 @@ namespace vexpenses.business.Components
             }
             else
             {
-                var errorResponseString = await responseMessage.Content.ReadAsStringAsync();
-
                 throw new Exception("Erro ao buscar dados referentes ao endereço solicitado");
             }
         }

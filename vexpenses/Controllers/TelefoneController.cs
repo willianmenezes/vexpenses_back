@@ -40,7 +40,7 @@ namespace vexpenses.Controllers
         [ProducesResponseType(401, Type = typeof(RequestResponse))]
         [Authorize("Bearer")]
         [HttpPost("{contatoId}")]
-        public async Task<IActionResult> CadastrarEnderecos([FromBody] List<TelefoneRequest> request, [FromRoute] Guid contatoId)
+        public async Task<IActionResult> CadastrarTelefones([FromBody] List<TelefoneRequest> request, [FromRoute] Guid contatoId)
         {
             try
             {

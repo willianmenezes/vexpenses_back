@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using vexpenses.data.Context;
 using vexpenses.data.IRepositories;
@@ -10,6 +12,14 @@ namespace vexpenses.data.Repositories
     public class ContatoRepository : BaseRepository, IContatoRepository
     {
         public ContatoRepository(VExpensesContext context) : base(context) { }
+
+        public async Task<List<Contato>> BuscarContatosPorAgenda(Guid agendaId)
+        {
+            return await _context.Contato
+                                .Include(x => x.AgendaContato)
+                                .Where(x => x.AgendaContato.Select(x => x.AgendaId).Contains(agendaId) && x.Status.Equals(true))
+                                .ToListAsync();
+        }
 
         public async Task CadastrarContato(Contato contato, Guid agendaId)
         {

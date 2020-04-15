@@ -20,12 +20,12 @@ namespace vexpenses.business.Components
             _config = config;
         }
 
-        private string TemplateEmailPadrao(Contato contato, string nomeAgenda)
+        private string TemplateEmailPadrao(Contato contato)
         {
             StringBuilder builder = new StringBuilder();
 
             builder.AppendLine("<br />");
-            builder.AppendLine($"<b>Um novo contato foi registrado em sua agenda: {nomeAgenda}.");
+            builder.AppendLine($"<b>Um novo contato foi registrado em sua agenda.");
             builder.AppendLine("<br /><br />");
             builder.AppendLine("Dados do contato: ");
             builder.AppendLine("<br /><br />");
@@ -42,7 +42,7 @@ namespace vexpenses.business.Components
 
             return builder.ToString();
         }
-        public async Task EnviarEmailContato(Contato contato, string destinatario, string nomeAgenda)
+        public async Task EnviarEmailContato(Contato contato, string destinatario)
         {
             if (_config == null)
             {
@@ -60,7 +60,7 @@ namespace vexpenses.business.Components
 
             mail.Subject = $"VExpenses - Cadastro de contato na sua agenda";
 
-            mail.Body = TemplateEmailPadrao(contato, nomeAgenda);
+            mail.Body = TemplateEmailPadrao(contato);
 
             mail.IsBodyHtml = true;
 
