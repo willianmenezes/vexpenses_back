@@ -32,11 +32,6 @@ namespace vexpenses.business.Components
                     throw new Exception("Id do tipo de telefone não fornecidado para o cadastro.");
                 }
 
-                if (await _telefoneRepository.VerificaTelefonePorNumero(request.Numero, contatoId))
-                {
-                    throw new Exception($"Já existe um número de telefone semelhante ao ({request.DDD}) {request.Numero}, cadastrado para este contato.");
-                }
-
                 var telefone = request.ConvertyToEntity();
                 telefone.ContatoId = contatoId;
 
