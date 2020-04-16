@@ -20,8 +20,8 @@ namespace vexpenses.library.Models.Request
         {
             return new Agenda
             {
-                Nome = Nome.Trim(),
-                Descricao = Descricao.Trim(),
+                Nome = Nome == null ? null : Nome.Trim(),
+                Descricao = Descricao == null ? null : Descricao.Trim(),
                 Status = true,
                 TipoAgendaId = TipoAgendaId
             };

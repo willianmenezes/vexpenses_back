@@ -33,9 +33,12 @@ namespace vexpenses.business.Components
             builder.AppendLine("<br /><br />");
             builder.AppendLine($"Email: {contato.Email}");
             builder.AppendLine("<br /><br />");
-            builder.AppendLine($"Telefone: ({contato.Telefone.First().DDD}){contato.Telefone.First().Numero}");
-            builder.AppendLine("<br /><br />");
-            builder.AppendLine("Para mais detalhes acesso o contato dirtetamente do aplicativo.");
+            if (contato.Telefone.Count > 0)
+            {
+                builder.AppendLine($"Telefone: ({contato.Telefone.FirstOrDefault().DDD}){contato.Telefone.FirstOrDefault().Numero}");
+                builder.AppendLine("<br /><br />");
+            }
+            builder.AppendLine("Para mais detalhes acesse o contato diretamente no aplicativo.");
             builder.AppendLine("<br /><br />");
             builder.AppendLine("Atenciosamente equipe VExpenses.");
             builder.AppendLine("<br />");

@@ -46,7 +46,7 @@ namespace vexpenses.business.Components
         {
             if (pessoaId == Guid.Empty)
             {
-                throw new ArgumentNullException("ID da do usuário não fornecido para esta operação");
+                throw new Exception("ID da do usuário não fornecido para esta operação");
             }
 
             var query = await _agendaRepository.BuscarAgendasPaginadas(pessoaId, pageIndex, pageSize);
@@ -59,6 +59,20 @@ namespace vexpenses.business.Components
                 TotalItens = query.TotalItens,
                 TotalPages = query.TotalPages
             };
+        }
+        public async Task ExcluirAgenda(Guid agendaId, Guid pessoaId)
+        {
+            if (agendaId == Guid.Empty)
+            {
+                throw new Exception("ID da agenda não fornecido");
+            }
+
+            if (pessoaId == Guid.Empty)
+            {
+                throw new Exception("ID da pessoa não fornecido");
+            }
+
+            await _agendaRepository.ExcluirAgenda(agendaId, pessoaId);
         }
     }
 }

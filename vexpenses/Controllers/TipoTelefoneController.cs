@@ -38,7 +38,7 @@ namespace vexpenses.Controllers
         [ProducesResponseType(200, Type = typeof(RequestResponse<IEnumerable<TipoTelefone>>))]
         [ProducesResponseType(400, Type = typeof(RequestResponse))]
         [ProducesResponseType(401, Type = typeof(RequestResponse))]
-        //[Authorize("Bearer")]
+        [Authorize("Bearer")]
         [HttpGet]
         public async Task<IActionResult> BuscarTiposTelefone()
         {

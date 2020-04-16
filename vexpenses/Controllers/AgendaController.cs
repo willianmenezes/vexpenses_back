@@ -66,19 +66,41 @@ namespace vexpenses.Controllers
         /// <response code="401">Não autorizado, deve obter um token de portador válido antes de fazer esta solicitação</response>
         /// <response code="404">Dados não encontrados</response>
         [ProducesResponseType(200, Type = typeof(RequestResponse<PaginationResponse<AgendaResponse>>))]
-        [ProducesResponseType(400, Type = typeof(RequestResponse))]
-        [ProducesResponseType(401, Type = typeof(RequestResponse))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [Authorize("Bearer")]
         [HttpPost("paginacao")]
         public async Task<IActionResult> BuscarAgendasPaginadas([FromBody] PaginationRequest request)
         {
             try
             {
-                return Ok(new RequestResponse<PaginationResponse<AgendaResponse>>
-                {
-                    Mensagem = "Agenda Cadastrada com sucesso",
-                    Resposta = await _agendaComponent.BuscarAgendasPaginadas(GetClaim().PessoaId, request.PageIndex, request.PageSize)
-                });
+                return Ok(await _agendaComponent.BuscarAgendasPaginadas(GetClaim().PessoaId, request.PageIndex, request.PageSize));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new RequestResponse { Mensagem = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Excluir agenda
+        /// </summary>
+        /// <returns></returns>
+        /// <response code="200">Agenda excluida com sucesso</response>
+        /// <response code="400">Ocorreu algum erro com a solicitação. Esta resposta pode mostrar as propriedades do erro ou apenas uma mensagem do que acontece</response>
+        /// <response code="401">Não autorizado, deve obter um token de portador válido antes de fazer esta solicitação</response>
+        /// <response code="404">Dados não encontrados</response>
+        [ProducesResponseType(200, Type = typeof(RequestResponse<PaginationResponse<AgendaResponse>>))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [Authorize("Bearer")]
+        [HttpDelete("{agendaId}")]
+        public async Task<IActionResult> ExcluirAgenda([FromRoute] Guid agendaId)
+        {
+            try
+            {
+                await _agendaComponent.ExcluirAgenda(agendaId, GetClaim().PessoaId);
+                return Ok(new RequestResponse { Mensagem = "Agenda excluida com sucesso" });
             }
             catch (Exception ex)
             {

@@ -10,6 +10,7 @@ namespace vexpenses.library.Models.Request
     {
         [Required]
         [MaxLength(8)]
+        [MinLength(8)]
         public string Cep { get; set; }
 
         [MaxLength(200)]
@@ -27,20 +28,17 @@ namespace vexpenses.library.Models.Request
         [MaxLength(200)]
         public string Uf { get; set; }
 
-        [Required]
-        public bool Status { get; set; }
-
         public Endereco ConvertyToEntity()
         {
             return new Endereco
             {
-                Bairro = Bairro.Trim(),
+                Bairro = Bairro == null ? null : Bairro.Trim(),
                 Cep = Cep.Trim(),
-                Complemento = Complemento.Trim(),
-                Localidade = Localidade.Trim(),
-                Logradouro = Logradouro.Trim(),
+                Complemento = Complemento == null ? null : Complemento.Trim(),
+                Localidade = Localidade == null ? null : Localidade.Trim(),
+                Logradouro = Logradouro == null ? null : Logradouro.Trim(),
                 Status = true,
-                Uf = Uf.Trim()
+                Uf = Uf == null ? null : Uf.Trim()
             };
         }
     }

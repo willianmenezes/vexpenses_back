@@ -17,7 +17,10 @@ namespace vexpenses.data.Repositories
         {
             return await _context.Contato
                                 .Include(x => x.AgendaContato)
+                                 .Include(x => x.Endereco)
+                                 .Include(x => x.Telefone)
                                 .Where(x => x.AgendaContato.Select(x => x.AgendaId).Contains(agendaId) && x.Status.Equals(true))
+                                .OrderBy(x => x.Nome)
                                 .ToListAsync();
         }
 
@@ -33,6 +36,21 @@ namespace vexpenses.data.Repositories
             catch (Exception ex)
             {
                 throw new Exception("Erro ao cadastrar contato", ex);
+            }
+        }
+
+        public async Task ExcluirContato(Guid contatoId)
+        {
+            try
+            {
+                var contato = await _context.Contato.FirstOrDefaultAsync(x => x.ContatoId.Equals(contatoId));
+                contato.Status = false;
+
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao excluir agenda", ex);
             }
         }
     }

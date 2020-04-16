@@ -44,7 +44,7 @@ namespace vexpenses.Controllers
         /// <response code="400">Ocorreu algum erro com a solicitação. Esta resposta pode mostrar as propriedades do erro ou apenas uma mensagem do que acontece</response>
         /// <response code="401">Não autorizado, deve obter um token de portador válido antes de fazer esta solicitação</response>
         /// <response code="404">Dados não encontrados</response>
-        [ProducesResponseType(200, Type = typeof(RequestResponse))]
+        [ProducesResponseType(200, Type = typeof(RequestResponse<string>))]
         [ProducesResponseType(400, Type = typeof(RequestResponse))]
         [ProducesResponseType(401, Type = typeof(RequestResponse))]
         [Authorize("Bearer")]
@@ -53,9 +53,9 @@ namespace vexpenses.Controllers
         {
             try
             {
-                await _contatoComponent.CadastrarContato(request, _telefoneComponent, _enderecoComponent, _emailComponent);
+                var contatoId = await _contatoComponent.CadastrarContato(request, _telefoneComponent, _enderecoComponent, _emailComponent);
 
-                return Ok(new RequestResponse { Mensagem = "Contato cadastrado com sucesso" });
+                return Ok(new RequestResponse<string> { Mensagem = "Contato cadastrado com sucesso", Resposta = contatoId.ToString() });
             }
             catch (Exception ex)
             {
@@ -85,6 +85,32 @@ namespace vexpenses.Controllers
                     Mensagem = "Contatos retornados com sucesso",
                     Resposta = await _contatoComponent.BuscarContatosPorAgenda(agendaId)
                 });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new RequestResponse { Mensagem = ex.Message });
+            }
+        }
+
+        /// <summary>
+        /// Excluir Contato
+        /// </summary>
+        /// <returns></returns>
+        /// <response code="200">contato excluida com sucesso</response>
+        /// <response code="400">Ocorreu algum erro com a solicitação. Esta resposta pode mostrar as propriedades do erro ou apenas uma mensagem do que acontece</response>
+        /// <response code="401">Não autorizado, deve obter um token de portador válido antes de fazer esta solicitação</response>
+        /// <response code="404">Dados não encontrados</response>
+        [ProducesResponseType(200, Type = typeof(RequestResponse<PaginationResponse<AgendaResponse>>))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [Authorize("Bearer")]
+        [HttpDelete("{contatoId}")]
+        public async Task<IActionResult> ExcluirContato([FromRoute] Guid contatoId)
+        {
+            try
+            {
+                await _contatoComponent.ExcluirContato(contatoId);
+                return Ok(new RequestResponse { Mensagem = "Contato excluido com sucesso" });
             }
             catch (Exception ex)
             {

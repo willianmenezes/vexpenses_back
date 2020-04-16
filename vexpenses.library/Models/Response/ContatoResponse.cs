@@ -15,5 +15,9 @@ namespace vexpenses.library.Models.Response
         public string Email { get; set; }
 
         public bool Status { get; set; }
+
+        public List<EnderecoResponse> Endereco { get; set; }
+
+        public List<TelefoneResponse> Telefone { get; set; }
     }
 }

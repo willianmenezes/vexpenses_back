@@ -8,10 +8,12 @@ namespace vexpenses.library.Models.Request
     {
         [Required]
         [MaxLength(2)]
+        [MinLength(2)]
         public string DDD { get; set; }
 
         [Required]
         [MaxLength(9)]
+        [MinLength(8)]
         public string Numero { get; set; }
 
         [Required]
@@ -21,8 +23,8 @@ namespace vexpenses.library.Models.Request
         {
             return new Telefone
             {
-                DDD = DDD.Trim(),
-                Numero = Numero.Trim(),
+                DDD = DDD == null ? null : DDD.Trim(),
+                Numero = Numero == null ? null : Numero.Trim(),
                 Status = true,
                 TipoTelefoneId = TipoTelefoneId
             };

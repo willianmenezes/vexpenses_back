@@ -21,6 +21,7 @@ namespace vexpenses.data.Repositories
                 var query = _context.Agenda
                                     .Include(x => x.TipoAgenda)
                                     .Where(x => x.PessoaId.Equals(pessoaId) && x.Status.Equals(true))
+                                    .OrderBy(x => x.Nome)
                                     .AsNoTracking();
 
                 return await PagedQueries<Agenda>.Create(query, pageIndex, pageSize);
@@ -42,6 +43,22 @@ namespace vexpenses.data.Repositories
             catch (Exception ex)
             {
                 throw new Exception("Erro ao cadastrar agenda", ex);
+            }
+        }
+
+        public async Task ExcluirAgenda(Guid agendaId, Guid pessoaId)
+        {
+            try
+            {
+                var agenda = await _context.Agenda.FirstOrDefaultAsync(x => x.AgendaId.Equals(agendaId) && x.PessoaId.Equals(pessoaId));
+
+                agenda.Status = false;
+
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao excluir agenda", ex);
             }
         }
 

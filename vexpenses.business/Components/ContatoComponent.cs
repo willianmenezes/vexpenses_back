@@ -19,7 +19,7 @@ namespace vexpenses.business.Components
             _mapper = mapper;
         }
 
-        public async Task CadastrarContato(ContatoRequest request, TelefoneComponent telefoneComponent, EnderecoComponent enderecoComponent, EmailComponent emailComponent)
+        public async Task<Guid> CadastrarContato(ContatoRequest request, TelefoneComponent telefoneComponent, EnderecoComponent enderecoComponent, EmailComponent emailComponent)
         {
             request.Validate();
 
@@ -42,17 +42,12 @@ namespace vexpenses.business.Components
                 throw new Exception("Erro ao cadastrar contato, verifique os dados e tente novamente");
             }
 
-            var telefone = request.Telefones;
-            var endereco = request.Enderecos;
-
-            await telefoneComponent.CadastrarTelefones(telefone, contato.ContatoId);
-
-            await enderecoComponent.CadastrarEnderecos(endereco, contato.ContatoId);
-
             if (!string.IsNullOrWhiteSpace(contato.Email))
             {
                 await emailComponent.EnviarEmailContato(contato, contato.Email);
             }
+
+            return contato.ContatoId;
         }
 
         public async Task<List<ContatoResponse>> BuscarContatosPorAgenda(Guid agendaId)
@@ -65,6 +60,16 @@ namespace vexpenses.business.Components
             var contatos = await _contatoRepository.BuscarContatosPorAgenda(agendaId);
 
             return _mapper.Map<List<ContatoResponse>>(contatos);
+        }
+
+        public async Task ExcluirContato(Guid contatoId)
+        {
+            if (contatoId == Guid.Empty)
+            {
+                throw new Exception("ID do contato não fornecido");
+            }
+
+            await _contatoRepository.ExcluirContato(contatoId);
         }
     }
 }

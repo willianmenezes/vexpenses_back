@@ -76,8 +76,9 @@ namespace vexpenses.business.Components
                         new[]
                         {
                             new Claim(ClaimTypes.Sid, userClaim.PessoaId.ToString()),
+                            new Claim(ClaimTypes.Name, baseUser.Nome),
                             new Claim(ClaimTypes.Email, userClaim.Email),
-                            new Claim(ClaimTypes.NameIdentifier, baseUser.Nome)
+                            new Claim(ClaimTypes.NameIdentifier, userClaim.PessoaId.ToString())
                         }
                     );
 

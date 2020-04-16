@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using vexpenses.data.Context;
 using vexpenses.data.IRepositories;
@@ -16,7 +17,7 @@ namespace vexpenses.data.Repositories
         {
             try
             {
-                return await _context.TipoTelefone.ToListAsync();
+                return await _context.TipoTelefone.OrderBy(x => x.Descricao).ToListAsync();
             }
             catch (Exception)
             {

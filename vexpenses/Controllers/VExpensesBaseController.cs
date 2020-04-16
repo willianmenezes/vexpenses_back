@@ -18,8 +18,8 @@ namespace vexpenses.Controllers
         /// <returns></returns>
         protected UserClaim GetClaim()
         {
-            var claimId = User.Claims.Skip(1).Take(1).FirstOrDefault();
-            var claimEmail = User.Claims.Skip(2).Take(1).FirstOrDefault();
+            var claimId = User.Claims.Skip(2).Take(1).FirstOrDefault();
+            var claimEmail = User.Claims.Skip(3).Take(1).FirstOrDefault();
 
             if (claimId == null || claimId.Type != ClaimTypes.Sid)
             {

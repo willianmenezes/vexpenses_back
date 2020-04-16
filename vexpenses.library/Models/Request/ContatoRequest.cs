@@ -10,6 +10,7 @@ namespace vexpenses.library.Models.Request
     {
         [Required]
         [MaxLength(200)]
+        [MinLength(3)]
         public string Nome { get; set; }
 
         [MaxLength(200)]
@@ -30,8 +31,8 @@ namespace vexpenses.library.Models.Request
             return new Contato
             {
                 Nome = Nome.Trim(),
-                Sobrenome = Sobrenome.Trim(),
-                Email = Email.Trim(),
+                Sobrenome = Sobrenome == null ? null : Sobrenome.Trim(),
+                Email = Email == null ? null : Email.Trim(),
                 Status = true
             };
         }

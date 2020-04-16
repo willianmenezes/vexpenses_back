@@ -10,5 +10,7 @@ namespace vexpenses.data.IRepositories
         Task CadastrarContato(Contato contato, Guid agendaId);
 
         Task<List<Contato>> BuscarContatosPorAgenda(Guid agendaId);
+
+        Task ExcluirContato(Guid contatoId);
     }
 }
